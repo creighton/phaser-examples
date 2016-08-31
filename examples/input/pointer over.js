@@ -1,5 +1,5 @@
 
-var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', this);
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
 function preload() {
 
@@ -18,7 +18,16 @@ function create() {
 
     bunny.inputEnabled = true;
 
+    game.input.addMoveCallback(p, this);
+
     // bunny.input.pixelPerfectOver = true;
+
+}
+
+function p(pointer) {
+
+    // console.log(pointer.);
+    console.log(pointer.event);
 
 }
 
@@ -38,5 +47,6 @@ function update() {
 function render() {
 
     game.debug.text("Over: " + bunny.input.pointerOver(), 32, 32);
+    game.debug.text(game.input.mouse.locked, 320, 32);
 
 }
